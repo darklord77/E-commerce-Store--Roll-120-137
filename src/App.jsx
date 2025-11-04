@@ -1,11 +1,21 @@
-import React from 'react'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Books from "./pages/Books";
+import BookDetails from "./pages/BookDetails";
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <p>Hello World</p>
-    </div>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/books/:id" element={<BookDetails />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
