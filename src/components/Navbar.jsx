@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -12,19 +12,38 @@ const Navbar = () => {
 
                 {/* Nav Links */}
                 <div className="hidden md:flex space-x-6 font-medium">
-                    <Link to="/" className="hover:text-indigo-600">Home</Link>
-                    <Link to="/books" className="hover:text-indigo-600">Books</Link>
-                    <Link to="/about" className="hover:text-indigo-600">About</Link>
-                    <Link to="/contact" className="hover:text-indigo-600">Contact</Link>
+                    <Link to="/" className="hover:text-indigo-600">
+                        Home
+                    </Link>
+                    <Link to="/books" className="hover:text-indigo-600">
+                        Books
+                    </Link>
+
+                    {/* New Services Link */}
+                    <Link to="/services" className="hover:text-indigo-600">
+                        Services
+                    </Link>
+
+                    <Link to="/about" className="hover:text-indigo-600">
+                        About
+                    </Link>
+                    <Link to="/contact" className="hover:text-indigo-600">
+                        Contact
+                    </Link>
                 </div>
 
                 {/* Icons */}
                 <div className="flex items-center space-x-4">
                     <Link to="/cart" className="relative">
                         <span className="material-icons">shopping_cart</span>
-                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">2</span>
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+                            2
+                        </span>
                     </Link>
-                    <Link to="/login" className="bg-indigo-600 text-white px-4 py-1 rounded-lg hover:bg-indigo-700">
+                    <Link
+                        to="/login"
+                        className="bg-indigo-600 text-white px-4 py-1 rounded-lg hover:bg-indigo-700"
+                    >
                         Login
                     </Link>
                 </div>
