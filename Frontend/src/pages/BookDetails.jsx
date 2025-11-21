@@ -59,7 +59,7 @@ const BookDetails = () => {
         >
             <div className="flex flex-col md:flex-row gap-10">
                 {/* Left: Book Image */}
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                     <img
                         src={book.image}
                         alt={book.title}

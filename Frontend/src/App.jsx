@@ -29,7 +29,6 @@ function App() {
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
       </Routes>
     </Router>
   );
