@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import UserManagement from './UserManagement';
 import BookManagement from './BookManagement';
+import OrderManagement from './OrderManagement';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('users');
@@ -17,6 +18,7 @@ const AdminDashboard = () => {
   const tabs = [
     { id: 'users', label: 'User Management', icon: '👥' },
     { id: 'books', label: 'Book Management', icon: '📚' },
+    { id: 'orders', label: 'Order Management', icon: '📦' },
   ];
 
   return (
@@ -78,6 +80,7 @@ const AdminDashboard = () => {
         >
           {activeTab === 'users' && <UserManagement />}
           {activeTab === 'books' && <BookManagement />}
+          {activeTab === 'orders' && <OrderManagement />}
         </motion.div>
       </div>
     </div>

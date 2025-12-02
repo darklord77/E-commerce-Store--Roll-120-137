@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function OrderConfirmation() {
     const orderId = Math.floor(Math.random() * 1000000);
@@ -37,18 +38,18 @@ export default function OrderConfirmation() {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
-                    <a
-                        href="/books"
+                    <Link
+                        to="/books"
                         className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
                     >
                         Continue Shopping
-                    </a>
-                    <a
-                        href="/orders"
+                    </Link>
+                    <Link
+                        to="/my-orders"
                         className="border border-gray-300 hover:bg-gray-100 px-6 py-2 rounded-lg transition"
                     >
                         View My Orders
-                    </a>
+                    </Link>
                 </div>
             </motion.div>
         </div>

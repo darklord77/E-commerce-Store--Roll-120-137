@@ -11,15 +11,17 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import AdminPage from "./pages/admin/AdminPage";
+import MyOrders from "./pages/MyOrders";
 import Services from "./assets/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
+    <div className="font-body">
+      <Router>
+        <Navbar />
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
         <Route path="/books/:id" element={<BookDetails />} />
@@ -32,9 +34,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<AdminPage />} />
-      </Routes>
-      <Footer />
-    </Router>
+        <Route path="/my-orders" element={<MyOrders />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>
   );
 }
 

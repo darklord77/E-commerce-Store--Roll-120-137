@@ -135,7 +135,7 @@ export const updateOrderToDelivered = async (req, res) => {
 // @access  Private
 export const getMyOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user._id });
+    const orders = await Order.find({ user: req.user._id }).populate('orderItems.book', 'image');
     res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });

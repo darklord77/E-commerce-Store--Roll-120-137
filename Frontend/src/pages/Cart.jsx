@@ -61,47 +61,67 @@ export default function Cart() {
     }
 
     return (
-        <div className="min-h-screen py-10 px-4 md:px-16 lg:px-24 bg-gray-50">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-7xl mx-auto"
-            >
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
-                    {cart.items.length > 0 && (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 pt-16">
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
+                <div className="max-w-7xl mx-auto px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center"
+                    >
+                        <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display">
+                            Shopping Cart
+                        </h1>
+                        <p className="text-xl text-indigo-100">
+                            Review your selected books and proceed to checkout
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-6 py-12">
+                {cart.items.length > 0 && (
+                    <div className="flex justify-end mb-8">
                         <button
                             onClick={handleClearCart}
-                            className="text-red-600 hover:text-red-800 text-sm"
+                            className="text-red-600 hover:text-red-800 text-sm bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all"
                         >
                             Clear Cart
                         </button>
-                    )}
-                </div>
+                    </div>
+                )}
 
                 {cart.items.length === 0 ? (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-center py-20 bg-white rounded-lg shadow-sm"
+                        className="text-center py-20 bg-white rounded-2xl shadow-lg"
                     >
-                        <svg className="mx-auto h-24 w-24 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0h15M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z" />
-                        </svg>
-                        <h3 className="text-xl font-medium text-gray-900 mb-2">Your cart is empty</h3>
-                        <p className="text-gray-500 mb-6">Start shopping to add items to your cart</p>
-                        <Link
-                            to="/books"
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors"
-                        >
-                            Continue Shopping
-                        </Link>
+                        <div className="text-6xl mb-6">🛒</div>
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4 font-display">Your cart is empty</h3>
+                        <p className="text-gray-600 mb-8 text-lg">Start shopping to add items to your cart</p>
+                        <div className="space-y-3">
+                            <Link
+                                to="/books"
+                                className="block bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-lg text-white px-8 py-4 rounded-full transition-all transform hover:scale-105 font-semibold"
+                            >
+                                Continue Shopping
+                            </Link>
+                            <Link
+                                to="/my-orders"
+                                className="block border-2 border-indigo-600 text-indigo-600 px-8 py-3 rounded-full hover:bg-indigo-50 transition-colors font-semibold"
+                            >
+                                View Previous Orders
+                            </Link>
+                        </div>
                     </motion.div>
                 ) : (
                     <div className="flex flex-col lg:flex-row gap-8">
                         {/* Cart Items */}
                         <div className="flex-1">
-                            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                                 {cart.items.map((item, index) => (
                                     <motion.div
                                         key={item.book._id}
@@ -160,7 +180,7 @@ export default function Cart() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="bg-white rounded-lg shadow-sm p-6 sticky top-6"
+                                className="bg-white rounded-2xl shadow-lg p-6 sticky top-6"
                             >
                                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
                                 
@@ -189,14 +209,21 @@ export default function Cart() {
 
                                 <button
                                     onClick={() => navigate('/checkout')}
-                                    className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-colors font-semibold"
+                                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl hover:shadow-lg transition-all transform hover:scale-105 font-semibold text-lg"
                                 >
                                     Proceed to Checkout
                                 </button>
                                 
                                 <Link
+                                    to="/my-orders"
+                                    className="block text-center bg-gradient-to-r from-gray-100 to-indigo-50 text-gray-700 py-3 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 mt-4 transition-all font-medium"
+                                >
+                                    View Previous Orders
+                                </Link>
+                                
+                                <Link
                                     to="/books"
-                                    className="block text-center text-indigo-600 hover:text-indigo-800 mt-4 transition-colors"
+                                    className="block text-center text-indigo-600 hover:text-purple-600 mt-4 transition-colors font-medium"
                                 >
                                     Continue Shopping
                                 </Link>
@@ -204,7 +231,7 @@ export default function Cart() {
                         </div>
                     </div>
                 )}
-            </motion.div>
+            </div>
         </div>
     );
 }

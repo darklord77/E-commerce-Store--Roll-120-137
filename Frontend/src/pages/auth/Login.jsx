@@ -28,6 +28,7 @@ const Login = () => {
             } else {
                 navigate('/');
             }
+            window.location.reload(); // Refresh to update navbar
         } catch (error) {
             setError(error.response?.data?.message || 'Login failed');
         } finally {
