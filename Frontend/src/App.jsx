@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetails from "./pages/BookDetails";
@@ -9,6 +10,7 @@ import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import AdminPage from "./pages/admin/AdminPage";
 import Services from "./assets/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -29,7 +31,9 @@ function App() {
         <Route path="/orderconfirmation" element={<OrderConfirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

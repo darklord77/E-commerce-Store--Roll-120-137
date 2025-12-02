@@ -1,40 +1,47 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const bookSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: [true, 'Book title is required'],
-        trim: true,
-    },
-    author: {
-        type: String,
-        required: [true, 'Author name is required'],
-        trim: true,
-    },
-    description: {
-        type: String,
-        required: [true, 'Book description is required'],
-        maxlength: 2000,
-    },
-    category: {
-        type: String,
-        required: [true, 'Book category is required'],
-        enum: ['Fiction', 'Non-Fiction', 'Science', 'Fantasy', 'Thriller', 'Biography', 'Other'],
-        default: 'Other',
-    },
-    price: {
-        type: Number,
-        required: [true, 'Book price is required'],
-        min: 0,
-    },
-    coverPicUrl: {
-        type: String,
-        required: [true, 'Cover picture URL is required'],
-    },
-
+  title: {
+    type: String,
+    required: [true, 'Title is required'],
+    trim: true,
+  },
+  author: {
+    type: String,
+    required: [true, 'Author is required'],
+    trim: true,
+  },
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+    min: 0,
+  },
+  description: {
+    type: String,
+    required: [true, 'Description is required'],
+  },
+  category: {
+    type: String,
+    required: [true, 'Category is required'],
+  },
+  stock: {
+    type: Number,
+    required: [true, 'Stock is required'],
+    min: 0,
+    default: 0,
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+  isbn: {
+    type: String,
+    unique: true,
+  },
 }, {
-    timestamps: true
+  timestamps: true,
 });
 
 const Book = mongoose.model('Book', bookSchema);
-module.exports = Book;
+
+export default Book;

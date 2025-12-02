@@ -1,7 +1,47 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { authAPI } from "../../services/api";
 
 const Signup = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        if (formData.password !== formData.confirmPassword) {
+            setError('Passwords do not match');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const { confirmPassword, ...signupData } = formData;
+            const response = await authAPI.signup(signupData);
+            localStorage.setItem('user', JSON.stringify(response));
+            
+            // Redirect based on user role
+            if (response.role === 'admin') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+        } catch (error) {
+            setError(error.response?.data?.message || 'Signup failed');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <motion.div
@@ -14,13 +54,23 @@ const Signup = () => {
                     Create an Account
                 </h2>
 
-                <form className="space-y-4">
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        {error}
+                    </div>
+                )}
+
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Full Name</label>
                         <input
                             type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
                             placeholder="John Doe"
                             className="w-full border border-gray-300 p-3 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
                         />
                     </div>
 
@@ -28,8 +78,12 @@ const Signup = () => {
                         <label className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder="you@example.com"
                             className="w-full border border-gray-300 p-3 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
                         />
                     </div>
 
@@ -37,8 +91,12 @@ const Signup = () => {
                         <label className="block text-sm font-medium text-gray-700">Password</label>
                         <input
                             type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
                             placeholder="********"
                             className="w-full border border-gray-300 p-3 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
                         />
                     </div>
 
@@ -48,16 +106,21 @@ const Signup = () => {
                         </label>
                         <input
                             type="password"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
                             placeholder="********"
                             className="w-full border border-gray-300 p-3 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
                         />
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
+                        disabled={loading}
+                        className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:opacity-50"
                     >
-                        Sign Up
+                        {loading ? 'Creating Account...' : 'Sign Up'}
                     </button>
                 </form>
 
